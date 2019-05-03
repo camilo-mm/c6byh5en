@@ -6,6 +6,7 @@ class Api::V1::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    render json: @products
   end
 
   # def create
@@ -18,10 +19,8 @@ class Api::V1::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
-        format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
