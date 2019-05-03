@@ -6,25 +6,13 @@ class Api::V1::ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    render json: @products
   end
-
-  # def create
-  #   @product = Product.create(product_params) 
-  # end
-
 
   def create
-    @product = Product.create(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+    @product = Product.create(product_params) 
   end
+
+
 
 
   def edit
