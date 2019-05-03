@@ -8,9 +8,25 @@ class Api::V1::ProductsController < ApplicationController
     @product = Product.new
   end
 
+  # def create
+  #   @product = Product.create(product_params) 
+  # end
+
+
   def create
     @product = Product.create(product_params)
+
+    respond_to do |format|
+      if @product.save
+        format.html { redirect_to @product, notice: 'Article was successfully created.' }
+        format.json { render :show, status: :created, location: @product }
+      else
+        format.html { render :new }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
   end
+
 
   def edit
     @product = Product.find(params[:id])
